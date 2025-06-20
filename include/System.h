@@ -188,6 +188,8 @@ public:
 
     float GetImageScale();
 
+    static std::string SettingsFile;
+
     //////////////////////
     // TEST SUPERPOINTS //
     //////////////////////

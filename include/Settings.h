@@ -111,6 +111,7 @@ namespace ORB_SLAM3 {
         float viewPointZ() {return viewPointZ_;}
         float viewPointF() {return viewPointF_;}
         float imageViewerScale() {return imageViewerScale_;}
+        bool usePythonExtractor() {return use_python_;}
 
         std::string atlasLoadFile() {return sLoadFrom_;}
         std::string atlasSaveFile() {return sSaveto_;}
@@ -150,6 +151,7 @@ namespace ORB_SLAM3 {
         void readIMU(cv::FileStorage& fSettings);
         void readRGBD(cv::FileStorage& fSettings);
         void readORB(cv::FileStorage& fSettings);
+        void readExtractor(cv::FileStorage& fSettings);
         void readViewer(cv::FileStorage& fSettings);
         void readLoadAndSave(cv::FileStorage& fSettings);
         void readOtherParameters(cv::FileStorage& fSettings);
@@ -205,6 +207,7 @@ namespace ORB_SLAM3 {
         float scaleFactor_;
         int nLevels_;
         float initThFAST_, minThFAST_;
+        bool use_python_;
 
         /*
          * Viewer stuff

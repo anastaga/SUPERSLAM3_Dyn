@@ -63,6 +63,7 @@ find_package(Pangolin REQUIRED)
 include_directories(
 ${PROJECT_SOURCE_DIR}
 ${PROJECT_SOURCE_DIR}/include
+${PROJECT_SOURCE_DIR}/include/Extractors
 ${PROJECT_SOURCE_DIR}/include/CameraModels
 ${PROJECT_SOURCE_DIR}/Thirdparty/Sophus
 ${PROJECT_SOURCE_DIR}/Thirdparty/DUtils
@@ -136,11 +137,26 @@ include/Config.h
 include/Settings.h
 
 include/Defs.h
+include/Extractors/BaseModel.h
+include/Extractors/HFextractor.h
+include/Extractors/KAZEextractor.h
+include/Extractors/SIFTextractor.h
+include/Extractors/SURFextractor.h
+include/Extractors/PythonCPPlink.h
+include/Extractors/PythonFeatureExtractor.h
 
 src/SPDetector.cpp
 src/SuperPoint.cpp
 include/SPDetector.hpp
-include/SuperPoint.hpp)
+include/SuperPoint.hpp
+src/Extractors/BaseModel.cc
+src/Extractors/HFextractor.cc
+src/Extractors/KAZEextractor.cc
+src/Extractors/SIFTextractor.cc
+src/Extractors/SURFextractor.cc
+src/Extractors/PythonCPPlink.cc
+src/Extractors/PythonFeatureExtractor.cc
+)
 
 add_subdirectory(Thirdparty/g2o)
 

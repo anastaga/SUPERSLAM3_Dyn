@@ -594,13 +594,26 @@ void Tracking::newParameterLoader(Settings *settings) {
     float fMinThFAST = settings->minThFAST();
     float fScaleFactor = settings->scaleFactor();
 
-    mpORBextractorLeft = new ORBextractor(nFeatures,fScaleFactor,nLevels,fIniThFAST,fMinThFAST);
+    if(settings->usePythonExtractor()) {
+        std::vector<BaseModel*> models;
+        InitAllModels(settings);
+        models = GetModelVec();
+        mpHFextractorLeft = new HFextractor(nFeatures, settings, models);
+    } else {
+        mpORBextractorLeft = new ORBextractor(nFeatures,fScaleFactor,nLevels,fIniThFAST,fMinThFAST);
+    }
 
     if(mSensor==System::STEREO || mSensor==System::IMU_STEREO)
-        mpORBextractorRight = new ORBextractor(nFeatures,fScaleFactor,nLevels,fIniThFAST,fMinThFAST);
+        if(settings->usePythonExtractor())
+            mpHFextractorRight = new HFextractor(nFeatures, settings, GetModelVec());
+        else
+            mpORBextractorRight = new ORBextractor(nFeatures,fScaleFactor,nLevels,fIniThFAST,fMinThFAST);
 
     if(mSensor==System::MONOCULAR || mSensor==System::IMU_MONOCULAR)
-        mpIniORBextractor = new ORBextractor(5*nFeatures,fScaleFactor,nLevels,fIniThFAST,fMinThFAST);
+        if(settings->usePythonExtractor())
+            mpIniHFextractor = new HFextractor(5*nFeatures, settings, GetModelVec());
+        else
+            mpIniORBextractor = new ORBextractor(5*nFeatures,fScaleFactor,nLevels,fIniThFAST,fMinThFAST);
 
     //IMU parameters
     Sophus::SE3f Tbc = settings->Tbc();

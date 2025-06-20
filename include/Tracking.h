@@ -32,6 +32,7 @@
 #include "ORBVocabulary.h"
 #include "KeyFrameDatabase.h"
 #include "ORBextractor.h"
+#include "Extractors/HFextractor.h"
 #include "MapDrawer.h"
 #include "System.h"
 #include "ImuTypes.h"
@@ -262,6 +263,9 @@ protected:
     //ORB
     ORBextractor* mpORBextractorLeft, *mpORBextractorRight;
     ORBextractor* mpIniORBextractor;
+    HFextractor* mpHFextractorLeft = nullptr;
+    HFextractor* mpHFextractorRight = nullptr;
+    HFextractor* mpIniHFextractor = nullptr;
 
     //BoW
     ORBVocabulary* mpORBVocabulary;
