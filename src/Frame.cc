@@ -22,6 +22,7 @@
 #include "MapPoint.h"
 #include "KeyFrame.h"
 #include "ORBextractor.h"
+#include "Extractors/HFextractor.h"
 #include "Converter.h"
 #include "ORBmatcher.h"
 #include "GeometricCamera.h"

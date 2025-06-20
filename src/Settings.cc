@@ -125,7 +125,7 @@ namespace ORB_SLAM3 {
     }
 
     Settings::Settings(const std::string &configFile, const int& sensor) :
-    bNeedToUndistort_(false), bNeedToRectify_(false), bNeedToResize1_(false), bNeedToResize2_(false) {
+    bNeedToUndistort_(false), bNeedToRectify_(false), bNeedToResize1_(false), bNeedToResize2_(false), use_python_(false) {
         sensor_ = sensor;
 
         //Open settings file
@@ -166,6 +166,8 @@ namespace ORB_SLAM3 {
 
         readORB(fSettings);
         cout << "\t-Loaded ORB settings" << endl;
+        readExtractor(fSettings);
+        cout << "\t-Loaded extractor settings" << endl;
         readViewer(fSettings);
         cout << "\t-Loaded viewer settings" << endl;
         readLoadAndSave(fSettings);
@@ -448,6 +450,14 @@ namespace ORB_SLAM3 {
         nLevels_ = readParameter<int>(fSettings,"ORBextractor.nLevels",found);
         initThFAST_ = readParameter<float>(fSettings,"ORBextractor.iniThFAST",found);
         minThFAST_ = readParameter<float>(fSettings,"ORBextractor.minThFAST",found);
+    }
+
+    void Settings::readExtractor(cv::FileStorage &fSettings) {
+        bool found;
+        string type = readParameter<string>(fSettings,"Extractor.type",found,false);
+        if(found && type == "PYTHON") {
+            use_python_ = true;
+        }
     }
 
     void Settings::readViewer(cv::FileStorage &fSettings) {
